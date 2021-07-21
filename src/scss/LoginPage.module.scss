@@ -1,0 +1,114 @@
+@import './Variables.scss';
+
+.container{
+    background-color: $background;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 300px 1fr;
+}
+.upperContainer{
+    grid-column: 1/3;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+.imgContainer{
+    grid-column: 2/12;
+    grid-row: 2/12;
+    overflow: hidden;
+}
+.imgContainer img{
+    width: 100%;
+    height: 100%;
+}
+.headingContainer{
+    grid-column: 2/12;
+    grid-row: 2/12;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    font-style: italic;
+    text-transform: uppercase;
+}
+.headingContainer div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    color: $buttonBackground;
+}
+.headingLogoContainer{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headingLogoContainer img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.lowerContainer{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.lowerContainerInner{
+    width: $widthOfLoginBlock;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid black;
+}
+
+// .buttonsContainer{
+//     display: flex;
+// }
+// .loginButtonContainer, .registrationButtonContainer{
+//     flex: 1;
+//     height: 4rem;
+    
+// }
+// .loginButtonContainer button, .registrationButtonContainer button{
+//     width: 9rem;
+//     height: 2rem;
+//     border: none;
+//     outline: none;
+//     background-color: $buttonBackground;
+//     margin: 0.5rem 0;
+//     font-size: $buttonFontSize;
+//     cursor: pointer;
+// }
+// .loginButtonContainerUnderline{
+//     display: block;
+//     height: 0.25px;
+//     width: 9rem;
+//     background-color: $buttonBackground;
+//     border: 1px solid $buttonBackground;
+//     margin: auto;
+// }
+// .registrationButtonContainerUnderline{
+//     display: block;
+//     height: 0.25px;
+//     width: 9rem;
+//     background-color: $buttonBackground;
+//     border: 1px solid $buttonBackground;
+//     margin: auto;
+// }
+
+.formsContainer{
+    flex: 1;
+}

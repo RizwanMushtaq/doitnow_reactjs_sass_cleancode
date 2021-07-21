@@ -1,0 +1,100 @@
+@import './Variables.scss';
+
+.container{
+    background-color: $background;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 300px 1fr;
+}
+.upperContainer{
+    grid-column: 1/3;
+    grid-row: 1/2;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+.imgContainer{
+    grid-column: 2/12;
+    grid-row: 2/12;
+    overflow: hidden;
+}
+.imgContainer img{
+    width: 100%;
+    height: 100%;
+}
+.headingContainer{
+    grid-column: 2/12;
+    grid-row: 2/12;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    font-style: italic;
+    text-transform: uppercase;
+}
+.headingContainer div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: baseline;
+    color: $buttonBackground;
+}
+.headingLogoContainer{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.headingLogoContainer img{
+    width: 100%;
+    height: 100%;
+}
+
+
+
+.lowerContainer{
+    grid-column: 1/3;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+}
+.lowerContainer div{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+.appQuote{
+    font-size: 1.5rem;
+    font-weight: normal;
+    text-align: left;
+    padding-bottom: 0.5rem;
+}
+.appIntro{
+    font-size: 1rem;
+    text-align: left;
+    padding-bottom: 2rem;
+}
+.lowerContainer .buttonContainer{
+    margin-bottom: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttonContainer button{
+    height: 100%;
+    width: 50%;
+    font-size: $buttonFontSize;
+    border: none;
+    outline: none;
+    background-color: $buttonBackground;
+    cursor: pointer;
+}

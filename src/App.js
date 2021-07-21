@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+import WelcomePage from './components/WelcomePage'
+import LoginPage from './components/LoginPage'
+import AppPage from './components/AppPage'
+import './scss/App.scss'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Forms from './functions/checkForms'
+
+export default function App() {
+  
+  const [appState, setAppState] = useState('WelcomePage')
+
+  const showLoginPage = () => {
+    console.log('In showLoginPageFunction')
+    setAppState('LoginPage')
+  }
+  const showAppPage = (e) => {
+    console.log('In showAppPageFunction')
+    e.preventDefault()
+    if(Forms.checkLoginFormInputs()){
+      if(Forms.verifyUser()){
+        setAppState('AppPage')
+      }else{
+        console.log('Incorrect User or Password')
+      }
+    } else{
+      console.log('Please enter values in required field')
+    }
+  }
+  
+  if(appState === 'WelcomePage'){
+    return (
+      <div className="App">
+        <WelcomePage showLoginPageHandler = {showLoginPage} />
+      </div>
+    )
+  }else if(appState === 'LoginPage'){
+    return (
+      <div className="App">
+        <LoginPage showAppPageHandler = {showAppPage} />
+      </div>
+    )
+  }else if(appState === 'AppPage'){
+    return (
+      <div className="App">
+        <AppPage />
+      </div>
+    )
+  }
+  
 }
 
-export default App;
