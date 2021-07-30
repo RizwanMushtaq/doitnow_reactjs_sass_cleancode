@@ -8,7 +8,7 @@ import LoginForm from './LoginForm'
 import RegistrationForm from './RegistrationForm'
 import ForgotPasswordForm from './ForgotPasswordForm'
 
-export default function LoginPage({showAppPageHandler}) {
+export default function LoginPage({showAppPageHandler, registerUserHandler}) {
 
     const [form, setForm] = useState('loginForm')
     const [loginBottonUnderline, setLoginBottonUnderline] = useState(true)
@@ -37,6 +37,7 @@ export default function LoginPage({showAppPageHandler}) {
                                 showRegistrationFormHandler={showRegistrationForm}
                                 loginBottonUnderline = {loginBottonUnderline}
                                 registrationBottonUnderline = {registrationBottonUnderline}
+                                
                                 />
         formVisible = <LoginForm showForgotPasswordFormHandler = {showForgotPasswordForm} showAppPageHandler = {showAppPageHandler}/>
 
@@ -48,7 +49,7 @@ export default function LoginPage({showAppPageHandler}) {
                                 loginBottonUnderline = {loginBottonUnderline}
                                 registrationBottonUnderline = {registrationBottonUnderline} 
                                 />
-        formVisible = <RegistrationForm />
+        formVisible = <RegistrationForm registerUserHandler={registerUserHandler} />
 
     } else if(form === 'forgotPasswordForm'){
         bottonsContainer = ''

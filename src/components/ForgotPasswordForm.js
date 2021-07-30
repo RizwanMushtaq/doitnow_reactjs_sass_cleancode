@@ -13,7 +13,7 @@ export default function ForgotPasswordForm({showLoginFormHandler}) {
                         <label>User:</label>
                         <div className={Style.InputContainerInner}>
                             <div>
-                                <img src={UserLogo}></img>
+                                <img src={UserLogo} alt='UserLogo'></img>
                             </div>
                             <input type='text'></input>
                         </div>
@@ -22,7 +22,7 @@ export default function ForgotPasswordForm({showLoginFormHandler}) {
                         <label>New Password:</label>
                         <div className={Style.InputContainerInner}>
                             <div>
-                                <img src={PasswordLogo}></img>
+                                <img src={PasswordLogo} alt='PasswordLogo'></img>
                             </div>
                             <input type='password'></input>
                         </div>
