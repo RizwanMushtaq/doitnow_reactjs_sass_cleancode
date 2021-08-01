@@ -1,0 +1,23 @@
+@import './Variables.scss';
+
+.container{
+    background-color: $background;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+}
+.innerContainer{
+    grid-column: 2/20;
+    grid-row: 2/20;
+    background-color: white;
+    width: 100%;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(20, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    position: relative;
+}

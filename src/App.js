@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import WelcomePage from './components/WelcomePage'
 import LoginPage from './components/LoginPage'
 import AppPage from './components/AppPage'
@@ -8,9 +8,25 @@ import Forms from './functions/checkForms'
 
 export default function App() {
   
+  console.log("Inside App component to track rendering of component")
+
   //appState Hook to track (WelcomePage, LoginPage, AppPage) in Viewer
   const [appState, setAppState] = useState('WelcomePage')
+  //logInState Hook to track (WelcomePage, LoginPage, AppPage) in Viewer
+  const [logInState, setLogInState] = useState(false)
 
+  //useEffect Hook, to call if logInState toggels
+  const logInStateToggelTracker = useRef(false)
+  useEffect( ()=>{
+    if(logInStateToggelTracker.current){
+      console.log('In use effect Hook to trigger if logInState changes')
+      setAppState('AppPage')
+    } else{
+      logInStateToggelTracker.current = true
+    }
+  }, [logInState])
+
+  
   //function to call, when user click Jetz Loslegen button in Welcoma Page
   const showLoginPage = () => {
     console.log('In showLoginPageFunction')
@@ -31,7 +47,7 @@ export default function App() {
 
           if(verificationResponse === 'true'){
               console.log('Correct UserName and Password')
-              setAppState('AppPage')
+              setLogInState(true)
           } else if(verificationResponse === 'false'){
               console.log('Incorrect Paswword')
               alert('Incorrect Paswword')
