@@ -1,5 +1,7 @@
 @import './Variables.scss';
 
+
+
 .container{
     background-color: $background;
     width: 100%;
@@ -11,6 +13,9 @@
     grid-template-rows: repeat(20, 1fr);
 }
 .innerContainer{
+    background-image: url('../images/todolist.jpg');
+    background-repeat: no-repeat;
+    
     grid-column: 2/20;
     grid-row: 2/20;
     background-color: white;
@@ -18,6 +23,17 @@
     overflow: hidden;
     display: grid;
     grid-template-columns: repeat(20, 1fr);
-    grid-template-rows: repeat(20, 1fr);
+    grid-template-rows: 5rem 1fr;
     position: relative;
+}
+.HeaderComponentContainer{
+    grid-column: 1/21;
+    grid-row: 1/2;
+}
+.BodyComponentsContainer{
+    grid-column: 1/21;
+    grid-row: 2/3;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
 }

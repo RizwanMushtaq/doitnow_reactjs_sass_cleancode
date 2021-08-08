@@ -14,6 +14,9 @@ export default function App() {
   const [appState, setAppState] = useState('WelcomePage')
   //logInState Hook to track (WelcomePage, LoginPage, AppPage) in Viewer
   const [logInState, setLogInState] = useState(false)
+  //Variables to store username And password
+  let [username, setUsername] = useState('')
+  let [password, setPassword] = useState('')
 
   //useEffect Hook, to call if logInState toggels
   const logInStateToggelTracker = useRef(false)
@@ -38,6 +41,11 @@ export default function App() {
     console.log('In showAppPageFunction')
     e.preventDefault()
     if(Forms.checkLoginFormInputs()){
+      let username = document.querySelector('#LoginFormUserInput').value
+      let password = document.querySelector('#LoginFormPasswordInput').value
+      setUsername(username)
+      setPassword(password)
+
       const callVerifyUserFunction = async () => {
         try{
           let verificationResponse = await Forms.verifyUser()
@@ -121,7 +129,7 @@ export default function App() {
   }else if(appState === 'AppPage'){
     return (
       <div className="App">
-        <AppPage />
+        <AppPage username={username} password={password}/>
       </div>
     )
   }

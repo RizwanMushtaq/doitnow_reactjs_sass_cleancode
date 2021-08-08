@@ -7,11 +7,22 @@ import ToDoContainer from './AppPageComponents/ToDoContainer'
 
 import Background from './AppPageComponents/Background'
 
-export default function AppPage() {
+
+export default function AppPage({username, password}) {
+
+    console.log('In AppPage Comonent   ' + username)
+
     return (
         <div className={Style.container}>
             <div className={Style.innerContainer}>
-                <Background></Background>
+                {/* <Background /> */}
+                <div className={Style.HeaderComponentContainer}>
+                    <Header username={username} />
+                </div>
+                <div className={Style.BodyComponentsContainer}>
+                    <Calender />
+                    <ToDoContainer />
+                </div>
             </div>
         </div>
     )
