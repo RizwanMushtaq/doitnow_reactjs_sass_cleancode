@@ -1,6 +1,7 @@
+@import '../Variables.scss';
 
 .container{
     width: 25rem;
     height: 25rem;
-    border: 1px solid black;
+    background-color: $background;
 }

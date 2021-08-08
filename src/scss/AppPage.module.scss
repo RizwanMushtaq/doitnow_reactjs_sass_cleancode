@@ -13,12 +13,10 @@
     grid-template-rows: repeat(20, 1fr);
 }
 .innerContainer{
-    background-image: url('../images/todolist.jpg');
-    background-repeat: no-repeat;
-    
+    // background-image: url('../images/todolist.jpg');
+    // background-repeat: no-repeat;
     grid-column: 2/20;
     grid-row: 2/20;
-    background-color: white;
     width: 100%;
     overflow: hidden;
     display: grid;
@@ -29,6 +27,7 @@
 .HeaderComponentContainer{
     grid-column: 1/21;
     grid-row: 1/2;
+    z-index: 2;
 }
 .BodyComponentsContainer{
     grid-column: 1/21;
@@ -36,4 +35,5 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    z-index: 2;
 }

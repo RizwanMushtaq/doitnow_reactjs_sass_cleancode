@@ -2,8 +2,7 @@ import React from 'react'
 import Style  from '../scss/AppPage.module.scss'
 
 import Header from './AppPageComponents/Header'
-import Calender from './AppPageComponents/Calender'
-import ToDoContainer from './AppPageComponents/ToDoContainer'
+import Data from './AppPageComponents/Data'
 
 import Background from './AppPageComponents/Background'
 
@@ -15,13 +14,12 @@ export default function AppPage({username, password}) {
     return (
         <div className={Style.container}>
             <div className={Style.innerContainer}>
-                {/* <Background /> */}
+                <Background />
                 <div className={Style.HeaderComponentContainer}>
                     <Header username={username} />
                 </div>
                 <div className={Style.BodyComponentsContainer}>
-                    <Calender />
-                    <ToDoContainer />
+                    <Data />
                 </div>
             </div>
         </div>

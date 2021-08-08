@@ -6,7 +6,7 @@ import BackgroundImage from '../../images/todolist.jpg'
 export default function Background() {
     return (
         <div className={Style.background}>
-            <img src={BackgroundImage}></img>
+            <img src={BackgroundImage} alt='background img'></img>
         </div>
     )
 }
