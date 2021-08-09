@@ -1,14 +1,10 @@
 import React from 'react'
 import Style  from '../../scss/AppPageComponents/Data.module.scss'
 
-import CalenderContainer from './CalenderContainer'
-import ToDoContainer from './ToDoContainer'
-
-export default function Data() {
+export default function Data(props) {
     return (
         <div className={Style.container}>
-            <CalenderContainer />
-            <ToDoContainer />
+            {props.children}
         </div>
     )
 }
