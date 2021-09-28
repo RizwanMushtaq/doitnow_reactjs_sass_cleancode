@@ -10,16 +10,16 @@ import ToDoContainer from './AppPageComponents/ToDoContainer'
 import Background from './AppPageComponents/Background'
 
 
-export default function AppPage({username, password}) {
+export default function AppPage({username, password, handleLogoutButtonClick}) {
 
-    console.log('In AppPage Comonent   ' + username)
+    console.log('In AppPage Component   ' + username)
 
     return (
         <div className={Style.container}>
             <div className={Style.innerContainer}>
                 <Background />
                 <div className={Style.HeaderComponentContainer}>
-                    <Header username={username} />
+                    <Header username={username} handleLogoutButtonClick={handleLogoutButtonClick} />
                 </div>
                 <div className={Style.BodyComponentsContainer}>
                     <Data>

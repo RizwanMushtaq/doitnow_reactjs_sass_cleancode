@@ -111,7 +111,12 @@ export default function App() {
       console.log('Please enter values in required field')
     }
   }
-  
+  //function to call when user click on logout button in AppPage Viewer
+  const handleLogoutButtonClick = () => {
+    console.log("In handleLogoutButtonClick function")
+    console.log(appState)
+    setAppState('WelcomePage')
+  }
 
   //Return block is decided on the basis of appState Hook
   if(appState === 'WelcomePage'){
@@ -129,7 +134,7 @@ export default function App() {
   }else if(appState === 'AppPage'){
     return (
       <div className="App">
-        <AppPage username={username} password={password}/>
+        <AppPage username={username} password={password} handleLogoutButtonClick={handleLogoutButtonClick}/>
       </div>
     )
   }

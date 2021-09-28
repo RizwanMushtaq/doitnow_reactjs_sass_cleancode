@@ -6,16 +6,32 @@
     // border: 1px solid black;
 
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 .userNameDiv{
     background-color: $background;
     border: none;
     outline: none;
+    margin-left: 1rem;
     padding-left: 2rem;
     padding-right: 2rem;
     width: fit-content;
     height: 3rem;
     font-size: 2rem;
+}
+
+.logoutButton{
+    background-color: $background;
+    border: none;
+    outline: none;
+    margin-right: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: fit-content;
+    height: 3rem;
+    font-size: 2rem;
+}
+.logoutButton:hover{
+    background-color: $backgroundHover;
 }
