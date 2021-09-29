@@ -102,7 +102,8 @@ Forms.verifyUser = async () => {
                         "password":password
                     })
                 })
-
+    console.log("Actual response from backend")
+    console.log(response)
     let data = await response.text()
     console.log('data is = ' + data)
     return data

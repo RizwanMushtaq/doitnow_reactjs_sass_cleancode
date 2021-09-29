@@ -36,20 +36,61 @@ export default function App() {
 
       const callVerifyUserFunction = async () => {
         try{
-          let verificationResponse = await Forms.verifyUser()
+          let user = document.querySelector('#LoginFormUserInput').value
+          let password = document.querySelector('#LoginFormPasswordInput').value
           
-          console.log('verficationResponse is = ') 
-          console.log(verificationResponse)
+          //Request to authenticate User at Login Request
+          let response = await fetch('http://localhost:8090/users/verify', {
+                          method: 'POST',
+                          headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify({
+                              "username":user,
+                              "password":password
+                          })
+                      })
+          console.log("Actual response from backend")
+          console.log(response)
 
-          if(verificationResponse === 'true'){
-              console.log('Correct UserName and Password')
-              setAppState('AppPage')
-          } else if(verificationResponse === 'false'){
-              console.log('Incorrect Paswword')
-              alert('Incorrect Paswword')
-          } else{
-              console.log('Incorrect UserName')
-              alert('Incorrect UserName')
+          if(response.status === 200) {
+            let data = await response.json()
+            console.log("Payload Data is : ")
+            console.log(data)
+
+            const bearerToken = 'Bearer ' + data.accessToken
+            localStorage.setItem("BearerToken", bearerToken)
+            localStorage.setItem("username", data.username)
+            
+            //Request to get Todos list for this user
+            let responseTodos = await fetch('http://localhost:8090/todos/', {
+                          method: 'GET',
+                          headers: {
+                              'Accept': 'application/json',
+                              'Content-Type': 'application/json',
+                              'Authorization': bearerToken 
+                          }
+                      })
+            console.log("Actual response from backend of todos List Request")
+            console.log(responseTodos)
+            if(responseTodos.status === 200){
+              let todoList = await responseTodos.json()
+              console.log(todoList)
+            } else{
+              console.log('authorization to user failed')
+            }
+
+            //Setting AppState to App Viewer
+            console.log("Valid User")
+            setAppState('AppPage')
+
+          } else if(response.status === 400){
+            console.log("Incorrect User name or Password")
+            alert("Incorrect User name or Password")
+          } else {
+            console.log("Unknown Error")
+            alert("Something went Wrong on Backend Side")
           }
 
         } catch(e){
