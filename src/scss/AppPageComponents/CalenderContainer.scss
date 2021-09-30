@@ -4,3 +4,9 @@
 .today{
     background-color: #fff;
 }
+.selectedDay{
+    border: 1px solid black;
+}
+.validDay:hover{
+    background-color: white;
+}

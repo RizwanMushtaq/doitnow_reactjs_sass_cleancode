@@ -1,13 +1,16 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import Style  from '../../scss/AppPageComponents/CalenderContainer.module.scss'
 import '../../scss/AppPageComponents/CalenderContainer.scss'
 
 import arrowiconlogo from '../../images/Pfeilrechts.svg'
 
 
-export default function CalenderContainer() {
+const CalenderContainer = React.memo( ({handleDaysDivClickevent}) => {    
+    console.log("In CalenderContainer Component")
 
-    const date = new Date()
+    // const date = new Date()
+    let [date, setDate] = useState(new Date())
+
     const renderKalender = () => {
         date.setDate(1)
         // console.log(date.getDay())  //how many day of previous month we need to show
@@ -21,7 +24,7 @@ export default function CalenderContainer() {
 
         const firstDayIndex = date.getDay()
         const lastDayIndex = new Date(date.getFullYear(), date.getMonth()+1, 0).getDay()
-        console.log(lastDayIndex)
+        // console.log(lastDayIndex)
         
         const nextDays = 7 - lastDayIndex - 1
 
@@ -49,19 +52,19 @@ export default function CalenderContainer() {
         }
 
         for(let i = 1; i<=lastDay; i++){
-            if(i === new Date().getDate() && date.getMonth() === new Date().getMonth()){
-                days += `<div class="today">${i}</div>`
+            if(i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()){
+                days += `<div class="today selectedDay validDay">${i}</div>`
+                // setSelectedDay(i)
             }else {
-                days += `<div>${i}</div>`
-            }
-            
+                days += `<div class="validDay">${i}</div>`
+            } 
         }
         
         for(let j=1; j<= nextDays; j++){
             days += `<div class="next-date">${j}</div>`
         }
 
-        console.log(days)
+        // console.log(days)
         monthDays.innerHTML = days
 
     }
@@ -77,13 +80,8 @@ export default function CalenderContainer() {
 
     useEffect( ()=> {
         renderKalender()
-
-    })
+    }, [])
     
-
-
-
-
     return (
         <div className={Style.container}>
             <div className={Style.monthDiv}>
@@ -104,7 +102,7 @@ export default function CalenderContainer() {
                 <div>FR.</div>
                 <div>SA.</div>
             </div>
-            <div className={Style.daysDiv} id={'daysDiv'}>
+            <div className={Style.daysDiv} id={'daysDiv'} onClick={handleDaysDivClickevent}>
                 <div className={Style.dayDiv}>
                     <div>31</div>
                     <div className={Style.dateWithToDo}>
@@ -151,6 +149,7 @@ export default function CalenderContainer() {
             </div>
         </div>
     )
-}
+})
 
 
+export default CalenderContainer

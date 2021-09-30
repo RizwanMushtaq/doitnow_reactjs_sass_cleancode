@@ -1,46 +1,73 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import Style  from '../../scss/AppPageComponents/ToDoContainer.module.scss'
 
-import ListContainer from './ListContainer'
-import WeatherContainer from './WeatherContainer'
+import plusIcon from '../../images/plus-svgrepo-com.svg'
+import deleteIcon from '../../images/Papierkorb.svg'
 
-export default function ToDoContainer() {
+export default function ToDoContainer({selectedDay, selectedMonth, selectedYear}) {
 
-    let [contentVisible, setContentVisible] = useState('listContainer')
-    let showListContainer = () => {
-        setContentVisible('listContainer')
-    }
-    let showWeatherContainer = () => {
-        setContentVisible('weatherContainer')
-    }
-    
-    let ViewerContent = <ListContainer />
-    if(contentVisible === 'listContainer'){
-        ViewerContent = <ListContainer />
-    } else if(contentVisible === 'weatherContainer'){
-        ViewerContent = <WeatherContainer />
-    }
-    useEffect( ()=>{
-        if(contentVisible === 'listContainer'){
-            document.querySelector('#todoListButton').style.backgroundColor = '#ffff'
-            document.querySelector('#weatherButton').style.backgroundColor = '#C9FFF0'
-            // ViewerContent = <ListContainer />
-        } else if(contentVisible === 'weatherContainer'){
-            // ViewerContent = <WeatherContainer />
-            document.querySelector('#todoListButton').style.backgroundColor = '#C9FFF0'
-            document.querySelector('#weatherButton').style.backgroundColor = '#ffff'
-        }
-    }, [contentVisible])
-
+    let selectedDate = selectedDay + '.' + selectedMonth + '.' + selectedYear
 
     return (
         <div className={Style.container}>
-            <div className={Style.dateHeader}>Day Month Year</div>
-            <div className={Style.menuHeader}>
-                <div onClick={showListContainer} id='todoListButton'>ToDo List</div>
-                <div onClick={showWeatherContainer} id='weatherButton'>Weather</div>
+            <div className={Style.Header}>
+                <div>{selectedDate}</div>
+                <div className={Style.addToDoDiv}>
+                    <img src={plusIcon} alt='plusIcon'></img>
+                </div>
             </div>
-            <div className={Style.contentContainer}>{ViewerContent}</div>
+            
+            <div className={Style.toDoListContainer}>
+                <div className={Style.todo_ListItem}>
+                    <div className={Style.todo_checkboxDiv}>
+                        <input type="checkbox" className={Style.todoCheckboxInput} />
+                    </div>
+                    <div className={Style.todo_item}>
+                        <div>itemgggggggggggggggggg gggggggggggggggggg ggggggggggggggggggg1</div>
+                    </div>
+                    <div className={Style.todo_deleteDiv}>
+                        <img src={deleteIcon} alt="deleteIcon" />
+                    </div>
+                </div>
+
+                <div className={Style.todo_ListItem}>
+                    <div className={Style.todo_checkboxDiv}>
+                        <input type="checkbox" className={Style.todoCheckboxInput} />
+                    </div>
+                    <div className={Style.todo_item}>
+                        <div>itemgggggggggggggggggg gggggggggggggggggg ggggggggggggggggggg1</div>
+                    </div>
+                    <div className={Style.todo_deleteDiv}>
+                        <img src={deleteIcon} alt="deleteIcon" />
+                    </div>
+                </div>
+
+                <div className={Style.todo_ListItem}>
+                    <div className={Style.todo_checkboxDiv}>
+                        <input type="checkbox" className={Style.todoCheckboxInput} />
+                    </div>
+                    <div className={Style.todo_item}>
+                        <div>itemgggggggggggggggggg gggggggggggggggggg ggggggggggggggggggg1</div>
+                    </div>
+                    <div className={Style.todo_deleteDiv}>
+                        <img src={deleteIcon} alt="deleteIcon" />
+                    </div>
+                </div>
+                
+                <div className={Style.todo_ListItem}>
+                    <div className={Style.todo_checkboxDiv}>
+                        <input type="checkbox" className={Style.todoCheckboxInput} />
+                    </div>
+                    <div className={Style.todo_item}>
+                        <div>itemgggggggggggggggggg gggggggggggggggggg ggggggggggggggggggg1</div>
+                    </div>
+                    <div className={Style.todo_deleteDiv}>
+                        <img src={deleteIcon} alt="deleteIcon" />
+                    </div>
+                </div>
+
+            </div>
+            
         </div>
     )
 }
