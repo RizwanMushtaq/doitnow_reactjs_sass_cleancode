@@ -8,6 +8,7 @@ import CalenderContainer from './AppPageComponents/CalenderContainer'
 import ToDoContainer from './AppPageComponents/ToDoContainer'
 
 import Background from './AppPageComponents/Background'
+import AddToDoItemDialog from './AppPageComponents/AddToDoItemDialog'
 
 export default function AppPage({username, password, handleLogoutButtonClick}) {
 
@@ -79,7 +80,15 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
         })
     }
 
-
+    let [showAddToDoItemDialog, setShowAddToDoItemDialog] = useState(false)
+    let handleAddTodoIconClick = () => {
+        console.log("In handleAddTodoIconClick function")
+        setShowAddToDoItemDialog(true)
+    }
+    let handleCancelButtonClick = () => {
+        console.log("In handleCancelButtonClick function")
+        setShowAddToDoItemDialog(false)
+    }
 
     return (
         <div className={Style.container}>
@@ -91,9 +100,14 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                 <div className={Style.BodyComponentsContainer}>
                     <Data>
                         <CalenderContainer handleDaysDivClickevent = {handleDaysDivClickevent}/>
-                        <ToDoContainer selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} />
+                        <ToDoContainer selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} handleAddTodoIconClick={handleAddTodoIconClick} />
                     </Data>
                 </div>
+                {showAddToDoItemDialog && 
+                    <AddToDoItemDialog
+                        selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} 
+                        handleCancelButtonClick={handleCancelButtonClick} 
+                    />}
             </div>
         </div>
     )
