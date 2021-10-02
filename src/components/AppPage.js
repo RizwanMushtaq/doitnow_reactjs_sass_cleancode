@@ -4,17 +4,19 @@ import Style  from '../scss/AppPage.module.scss'
 import Header from './AppPageComponents/Header'
 import Data from './AppPageComponents/Data'
 
-import CalenderContainer from './AppPageComponents/CalenderContainer'
+// import CalenderContainer from './AppPageComponents/CalenderContainer'
+import CalenderContainerNew from './AppPageComponents/CalenderContainerNew'
 import ToDoContainer from './AppPageComponents/ToDoContainer'
 
 import Background from './AppPageComponents/Background'
 import AddToDoItemDialog from './AppPageComponents/AddToDoItemDialog'
 
+import dateForViewer from '../components/GlobalVariable_DateForViewer'
+
 export default function AppPage({username, password, handleLogoutButtonClick}) {
 
     console.log('In AppPage Component   ' + username)
-
-    let [dateForViewer, setDateForViewer] = useState(new Date())
+    
     let todayDate = String(dateForViewer.getDate()).padStart(2,'0')
     let thismonth = String(dateForViewer.getMonth()+1).padStart(2,'0')
 
@@ -99,7 +101,9 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                 </div>
                 <div className={Style.BodyComponentsContainer}>
                     <Data>
-                        <CalenderContainer handleDaysDivClickevent = {handleDaysDivClickevent}/>
+                        {/*<CalenderContainer handleDaysDivClickevent = {handleDaysDivClickevent}/>*/}
+
+                        <CalenderContainerNew handleDaysDivClickevent = {handleDaysDivClickevent}/>
                         <ToDoContainer selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} handleAddTodoIconClick={handleAddTodoIconClick} />
                     </Data>
                 </div>

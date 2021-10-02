@@ -1,88 +1,87 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import Style  from '../../scss/AppPageComponents/CalenderContainer.module.scss'
 import '../../scss/AppPageComponents/CalenderContainer.scss'
 
 import arrowiconlogo from '../../images/Pfeilrechts.svg'
 
+import date from '../GlobalVariable_DateForCalender'
 
-const CalenderContainer = React.memo( ({handleDaysDivClickevent}) => {    
-    console.log("In CalenderContainer Component")
+const CalenderContainerNew = React.memo( ({handleDaysDivClickevent}) => {    
+    
+    console.log("In CalenderContainerNew Component")
 
-    // const date = new Date()
-    let [date, setDate] = useState(new Date())
+    const renderKalender = () => {
+        console.log("In CalenderContainerNew Component useEffect Hook")
+        date.setDate(1)
+        console.log(date)
+        // console.log(date.getDay())  //how many day of previous month we need to show
 
+        const monthDays = document.querySelector('#daysDiv')
+
+        const lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate() //to get last day of current month means to get total number of days in current month
+
+        const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate()
+        // console.log(prevLastDay)
+
+        const firstDayIndex = date.getDay()
+        const lastDayIndex = new Date(date.getFullYear(), date.getMonth()+1, 0).getDay()
+        // console.log(lastDayIndex)
+        
+        const nextDays = 7 - lastDayIndex - 1
+
+        const months = [
+            "Januar",
+            "Februar",
+            "März",
+            "April",
+            "Mai",
+            "Juni",
+            "Juli",
+            "August",
+            "September",
+            "Oktober",
+            "November",
+            "Dezember"
+        ]
+
+        document.querySelector('#monthHeaderDiv').innerHTML = months[date.getMonth()]+ ' ' + date.getFullYear()
+
+        let days = "";
+        
+        for(let x=firstDayIndex; x>0; x--){
+            days += `<div class="prev-date">${prevLastDay - x + 1}</div>`
+        }
+
+        for(let i = 1; i<=lastDay; i++){
+            if(i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()){
+                days += `<div class="today selectedDay validDay">${i}</div>`
+                // setSelectedDay(i)
+            }else {
+                days += `<div class="validDay">${i}</div>`
+            } 
+        }
+        
+        for(let j=1; j<= nextDays; j++){
+            days += `<div class="next-date">${j}</div>`
+        }
+
+        // console.log(days)
+        monthDays.innerHTML = days
+
+    }
 
     let handlePreviousMonth = ()=>{
-        setDate(date.setMonth(date.getMonth()-1))
-        // renderKalender()
+        date.setMonth(date.getMonth()-1)
+        renderKalender()
     }
     let handleNextMonth = ()=>{
-        setDate(date.setMonth(date.getMonth()+1))
-        // renderKalender()
+        date.setMonth(date.getMonth()+1)
+        renderKalender()
     }
 
     useEffect( ()=> {
-        
-        const renderKalender = () => {
-            date.setDate(1)
-            // console.log(date.getDay())  //how many day of previous month we need to show
-    
-            const monthDays = document.querySelector('#daysDiv')
-    
-            const lastDay = new Date(date.getFullYear(), date.getMonth()+1, 0).getDate() //to get last day of current month means to get total number of days in current month
-    
-            const prevLastDay = new Date(date.getFullYear(), date.getMonth(), 0).getDate()
-            // console.log(prevLastDay)
-    
-            const firstDayIndex = date.getDay()
-            const lastDayIndex = new Date(date.getFullYear(), date.getMonth()+1, 0).getDay()
-            // console.log(lastDayIndex)
-            
-            const nextDays = 7 - lastDayIndex - 1
-    
-            const months = [
-                "Januar",
-                "Februar",
-                "März",
-                "April",
-                "Mai",
-                "Juni",
-                "Juli",
-                "August",
-                "September",
-                "Oktober",
-                "November",
-                "Dezember"
-            ]
-    
-            document.querySelector('#monthHeaderDiv').innerHTML = months[date.getMonth()]+ ' ' + date.getFullYear()
-    
-            let days = "";
-            
-            for(let x=firstDayIndex; x>0; x--){
-                days += `<div class="prev-date">${prevLastDay - x + 1}</div>`
-            }
-    
-            for(let i = 1; i<=lastDay; i++){
-                if(i === new Date().getDate() && date.getMonth() === new Date().getMonth() && date.getFullYear() === new Date().getFullYear()){
-                    days += `<div class="today selectedDay validDay">${i}</div>`
-                    // setSelectedDay(i)
-                }else {
-                    days += `<div class="validDay">${i}</div>`
-                } 
-            }
-            
-            for(let j=1; j<= nextDays; j++){
-                days += `<div class="next-date">${j}</div>`
-            }
-    
-            // console.log(days)
-            monthDays.innerHTML = days
-    
-        }
-
         renderKalender()
-    })
+    }, [])
     
     return (
         <div className={Style.container}>
@@ -154,4 +153,4 @@ const CalenderContainer = React.memo( ({handleDaysDivClickevent}) => {
 })
 
 
-export default CalenderContainer
+export default CalenderContainerNew
