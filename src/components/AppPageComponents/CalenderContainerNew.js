@@ -69,6 +69,7 @@ const CalenderContainerNew = React.memo( ({handleDaysDivClickevent}) => {
         monthDays.innerHTML = days
 
     }
+    
 
     let handlePreviousMonth = ()=>{
         date.setMonth(date.getMonth()-1)
