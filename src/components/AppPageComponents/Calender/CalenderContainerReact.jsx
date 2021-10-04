@@ -9,9 +9,10 @@ import arrowiconlogo from '../../../images/Pfeilrechts.svg'
 export default function CalenderContainerReact({handleDaysDivClickevent, selectedDay, selectedMonth, selectedYear}) {
     
     console.log('In CalenderContainerReact')
-    console.log(selectedDay)
-    let selectedDayDate = setDate(new Date(selectedYear, selectedMonth, selectedDay), selectedDay)
-    console.log(selectedDayDate)
+    // console.log(selectedDay)
+    let selectedMonthActual = selectedMonth-1;
+    let selectedDayDate = setDate(new Date(selectedYear, selectedMonthActual, selectedDay), selectedDay)
+    // console.log(selectedDayDate)
 
     let [myDate, setMyDate] = useState(new Date())
     let data = takeMonth(myDate)()
@@ -28,14 +29,17 @@ export default function CalenderContainerReact({handleDaysDivClickevent, selecte
                 return <div className={Style.otherDays} key={day}>{format(day, 'dd')}</div>
             } else {
                 if(isSameDay(day, todayDate)){
-                    if(isSameDay(day, selectedDayDate)){
-                        return <div key={day} className={`${Style.todayDate} ${Style.activeDays} ${Style.selectedDay}`} onClick={handleDaysDivClickevent} >{format(day, 'dd')}</div>
+                    if(isSameDay(day, selectedDayDate )){
+                        return <div key={day} className={`${Style.activeDays} ${Style.todayDate} ${Style.selectedDay}`} onClick={handleDaysDivClickevent} >{format(day, 'dd')}</div>
                     } else{
-                        return <div key={day} className={`${Style.todayDate} ${Style.activeDays} ${Style.selectedDay}`} onClick={handleDaysDivClickevent} >{format(day, 'dd')}</div>
+                        return <div key={day} className={`${Style.todayDate} ${Style.activeDays}`} onClick={handleDaysDivClickevent} >{format(day, 'dd')}</div>
                     }
-                    
                 } else {
-                    return <div key={day} className={Style.activeDays} onClick={handleDaysDivClickevent}>{format(day, 'dd')}</div>
+                    if(isSameDay(day, selectedDayDate )){
+                        return <div key={day} className={`${Style.activeDays} ${Style.selectedDay}`} onClick={handleDaysDivClickevent} >{format(day, 'dd')}</div>
+                    } else {
+                        return <div key={day} className={Style.activeDays} onClick={handleDaysDivClickevent}>{format(day, 'dd')}</div>
+                    }
                 } 
             } 
         }) 
@@ -66,13 +70,13 @@ export default function CalenderContainerReact({handleDaysDivClickevent, selecte
                 </div>
             </div>
             <div className={Style.weekDiv}>
-                <div>SO.</div>
-                <div>MO.</div>
-                <div>DI.</div>
-                <div>MI.</div>
-                <div>DO.</div>
-                <div>FR.</div>
-                <div>SA.</div>
+                <div>SUN</div>
+                <div>MON</div>
+                <div>TUE</div>
+                <div>WED</div>
+                <div>THU</div>
+                <div>FRI</div>
+                <div>SAT</div>
             </div>
             <div className={Style.daysDiv} id={'daysDiv'}>
                 {showData}

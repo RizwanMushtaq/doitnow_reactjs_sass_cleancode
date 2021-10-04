@@ -88,11 +88,27 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
         console.log("In handleAddTodoIconClick function")
         setShowAddToDoItemDialog(true)
     }
+
+    //Function to handle cancel button click in AddToDoItem Dialog
     let handleCancelButtonClick = () => {
         console.log("In handleCancelButtonClick function")
         setShowAddToDoItemDialog(false)
     }
+    //Function to handle save button click in AddToDoItem Dialog
+    let handleSaveButtonClick = () => {
+        console.log("In handleSaveButtonClick function")
+        console.log(document.querySelector('#toDoTextArea').value.trim().length)
+        if(document.querySelector('#toDoTextArea').value.trim().length){
+            console.log('input field is OK')
 
+            // setShowAddToDoItemDialog(false)
+            
+        } else {
+            console.log('input field empty')
+            alert('input field is empty')
+        }
+        
+    }
 
     return (
         <div className={Style.container}>
@@ -112,7 +128,8 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                 {showAddToDoItemDialog && 
                     <AddToDoItemDialog
                         selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} 
-                        handleCancelButtonClick={handleCancelButtonClick} 
+                        handleCancelButtonClick={handleCancelButtonClick}
+                        handleSaveButtonClick={handleSaveButtonClick}  
                     />}
             </div>
         </div>
