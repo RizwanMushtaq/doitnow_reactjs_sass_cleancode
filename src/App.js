@@ -61,25 +61,27 @@ export default function App() {
 
             const bearerToken = 'Bearer ' + data.accessToken
             localStorage.setItem("BearerToken", bearerToken)
-            localStorage.setItem("username", data.username)
+            localStorage.setItem("userName", data.userName)
+            localStorage.setItem("userID", data.userID)
+            localStorage.setItem("userEMail", data.userEMail)
             
             //Request to get Todos list for this user
-            let responseTodos = await fetch('http://localhost:8090/todos/', {
-                          method: 'GET',
-                          headers: {
-                              'Accept': 'application/json',
-                              'Content-Type': 'application/json',
-                              'Authorization': bearerToken 
-                          }
-                      })
-            console.log("Actual response from backend of todos List Request")
-            console.log(responseTodos)
-            if(responseTodos.status === 200){
-              let todoList = await responseTodos.json()
-              console.log(todoList)
-            } else{
-              console.log('authorization to user failed')
-            }
+            // let responseTodos = await fetch('http://localhost:8090/todos/read', {
+            //               method: 'POST',
+            //               headers: {
+            //                   'Accept': 'application/json',
+            //                   'Content-Type': 'application/json',
+            //                   'Authorization': bearerToken 
+            //               }
+            //           })
+            // console.log("Actual response from backend of todos List Request")
+            // console.log(responseTodos)
+            // if(responseTodos.status === 200){
+            //   let todoList = await responseTodos.json()
+            //   console.log(todoList)
+            // } else{
+            //   console.log('authorization to user failed')
+            // }
 
             //Setting AppState to App Viewer
             console.log("Valid User")

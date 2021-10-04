@@ -8,7 +8,7 @@ import arrowiconlogo from '../../../images/Pfeilrechts.svg'
 
 export default function CalenderContainerReact({handleDaysDivClickevent, selectedDay, selectedMonth, selectedYear}) {
     
-    console.log('In CalenderContainerReact')
+    console.log('In CalenderContainerReact Component')
     // console.log(selectedDay)
     let selectedMonthActual = selectedMonth-1;
     let selectedDayDate = setDate(new Date(selectedYear, selectedMonthActual, selectedDay), selectedDay)

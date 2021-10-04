@@ -25,6 +25,8 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
     let [selectedMonth, setSelectedMonth] = useState(thismonth)
     let [selectedYear, setSelectedYear] = useState(dateForViewer.getFullYear())
 
+    let [updateToDoContainer, setUpdateToDoContainer] = useState(false)
+
     let handleDaysDivClickevent = (event) => {
         event.target.classList.forEach(element => {
             if(element === 'otherDays'){
@@ -95,13 +97,65 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
         setShowAddToDoItemDialog(false)
     }
     //Function to handle save button click in AddToDoItem Dialog
-    let handleSaveButtonClick = () => {
+    let handleSaveButtonClick = async () => {
         console.log("In handleSaveButtonClick function")
         console.log(document.querySelector('#toDoTextArea').value.trim().length)
         if(document.querySelector('#toDoTextArea').value.trim().length){
             console.log('input field is OK')
 
-            // setShowAddToDoItemDialog(false)
+            let bearerToken = localStorage.getItem('BearerToken')
+            let userID = localStorage.getItem('userID')
+            let toDoItem = document.querySelector('#toDoTextArea').value
+            let selectedDate = selectedDay + '.' + selectedMonth + '.' + selectedYear
+            console.log(toDoItem)
+            console.log(userID)
+            console.log(selectedDate)
+
+            try{
+                //Request to write todo Item in database
+                let response = await fetch('http://localhost:8090/todos/write', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': bearerToken
+                    },
+                    body: JSON.stringify({
+                        "userID": userID,
+                        "toDoItem": toDoItem,
+                        "selectedDate": selectedDate
+                    })
+                })
+                console.log("Actual response from backend")
+                console.log(response)
+
+                if(response.status === 200){
+                    let data = await response.json()
+                    console.log(data)
+                    if(data.result === 'success'){
+                        
+                        setShowAddToDoItemDialog(false)
+                        console.log('data inserted successfully')
+                        //making useState hook to toggel to update viewer each time
+                        if(updateToDoContainer === true){
+                            setUpdateToDoContainer(false)
+                        }else{
+                            setUpdateToDoContainer(true)
+                        }
+                    }
+                } else{
+                    alert(response)
+                    console.log(response)
+                }
+
+            } catch(e) {
+                console.log('In catch error block')
+                alert(e)
+                console.log(e)
+            }
+            
+
+            console.log("waiting ....")
             
         } else {
             console.log('input field empty')
@@ -119,10 +173,14 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                 </div>
                 <div className={Style.BodyComponentsContainer}>
                     <Data>
-                        {/*<CalenderContainer handleDaysDivClickevent = {handleDaysDivClickevent}/>*/}
-
                         <CalenderContainerReact handleDaysDivClickevent = {handleDaysDivClickevent} selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} />
-                        <ToDoContainer selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} handleAddTodoIconClick={handleAddTodoIconClick} />
+                        <ToDoContainer 
+                            selectedDay={selectedDay} 
+                            selectedMonth={selectedMonth} 
+                            selectedYear={selectedYear} 
+                            handleAddTodoIconClick={handleAddTodoIconClick} 
+                            updateToDoContainer = {updateToDoContainer}
+                        />
                     </Data>
                 </div>
                 {showAddToDoItemDialog && 
