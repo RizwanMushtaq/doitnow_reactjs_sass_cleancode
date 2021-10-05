@@ -1,6 +1,7 @@
 .container{
     width: 25rem;
     height: 25rem;
+    cursor: default;
 }
 .monthDiv{
     width: 21rem;
@@ -17,6 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .previousMonth img{
     width: 100%;
@@ -29,6 +31,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .nextMonth img{
     width: 100%;
@@ -42,6 +45,7 @@
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
+    
 }
 .weekDiv div{
     width: 3rem;
@@ -66,14 +70,15 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    
 }
-
 
 .todayDate{
     background-color: white;
 }
 .otherDays{
     color: gray;
+    cursor: default;
 }
 .selectedDay{
     border: 1px solid black;
@@ -81,4 +86,5 @@
 
 .activeDays:hover{
     background-color: white;
+    cursor: pointer;
 }

@@ -107,6 +107,7 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
             let userID = localStorage.getItem('userID')
             let toDoItem = document.querySelector('#toDoTextArea').value
             let selectedDate = selectedDay + '.' + selectedMonth + '.' + selectedYear
+            let done = false
             console.log(toDoItem)
             console.log(userID)
             console.log(selectedDate)
@@ -123,7 +124,9 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                     body: JSON.stringify({
                         "userID": userID,
                         "toDoItem": toDoItem,
-                        "selectedDate": selectedDate
+                        "selectedDate": selectedDate,
+                        "done": done
+                        
                     })
                 })
                 console.log("Actual response from backend")

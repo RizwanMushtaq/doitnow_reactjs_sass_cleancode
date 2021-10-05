@@ -66,6 +66,12 @@ export default function ToDoContainer({selectedDay, selectedMonth, selectedYear,
     
     }, [selectedDay, selectedMonth, selectedYear, updateToDoContainer])
 
+
+    let handleCheckboxClick = (event) => {
+        console.log(event.target.id)
+        console.log(event.target.checked)
+    }
+
     return (
         <div className={Style.container}>
             <div className={Style.Header}>
@@ -81,10 +87,19 @@ export default function ToDoContainer({selectedDay, selectedMonth, selectedYear,
                     isValidData &&   
                         data.ToDoList.map( (item) => {
                             return(
-                            <div className={Style.todo_ListItem}>
-                                <div className={Style.todo_checkboxDiv}>
-                                    <input type="checkbox" className={Style.todoCheckboxInput} />
-                                </div>
+                            <div className={Style.todo_ListItem} key={item.Item_ID}>
+                                
+                                {  item.Done 
+                                    ?
+                                    <div className={Style.todo_checkboxDiv}>
+                                        <input type="checkbox" defaultChecked className={Style.todoCheckboxInput} id={item.Item_ID} onChange={handleCheckboxClick} />
+                                    </div>
+                                    :
+                                    <div className={Style.todo_checkboxDiv}>
+                                        <input type="checkbox" className={Style.todoCheckboxInput} id={item.Item_ID} onChange={handleCheckboxClick} />
+                                    </div>
+                                }
+                                   
                                 <div className={Style.todo_item}>
                                     <div>{item.Todo}</div>
                                 </div>
