@@ -166,6 +166,11 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
         }
         
     }
+    //Function to handle when user click on check box to set item to done or undone state in ToDoContainer Component
+    let handleCheckboxClick = (event) => {
+        console.log(event.target.id)
+        console.log(event.target.checked)
+    }
 
     return (
         <div className={Style.container}>
@@ -181,7 +186,8 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                             selectedDay={selectedDay} 
                             selectedMonth={selectedMonth} 
                             selectedYear={selectedYear} 
-                            handleAddTodoIconClick={handleAddTodoIconClick} 
+                            handleAddTodoIconClick={handleAddTodoIconClick}
+                            handleCheckboxClick={handleCheckboxClick} 
                             updateToDoContainer = {updateToDoContainer}
                         />
                     </Data>

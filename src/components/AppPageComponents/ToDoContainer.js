@@ -5,7 +5,7 @@ import plusIcon from '../../images/plus-svgrepo-com.svg'
 import deleteIcon from '../../images/Papierkorb.svg'
 // import setDate from 'date-fns/setDate'
 
-export default function ToDoContainer({selectedDay, selectedMonth, selectedYear, handleAddTodoIconClick, updateToDoContainer}) {
+export default function ToDoContainer({selectedDay, selectedMonth, selectedYear, handleAddTodoIconClick, updateToDoContainer, handleCheckboxClick}) {
 
     console.log('In ToDoContainer Component')
     let selectedDate = selectedDay + '.' + selectedMonth + '.' + selectedYear
@@ -67,10 +67,7 @@ export default function ToDoContainer({selectedDay, selectedMonth, selectedYear,
     }, [selectedDay, selectedMonth, selectedYear, updateToDoContainer])
 
 
-    let handleCheckboxClick = (event) => {
-        console.log(event.target.id)
-        console.log(event.target.checked)
-    }
+    
 
     return (
         <div className={Style.container}>
