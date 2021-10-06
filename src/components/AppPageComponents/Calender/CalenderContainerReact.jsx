@@ -3,6 +3,7 @@ import { takeMonth } from './calender'
 import { addMonths, subMonths, format, isSameMonth, isSameDay, setDate } from 'date-fns'
 
 import Style from './CalenderContainerReact.module.scss'
+import APIEndPoints from '../../../config/apiEndPoints'
 
 import arrowiconlogo from '../../../images/Pfeilrechts.svg'
 
@@ -136,7 +137,7 @@ export default function CalenderContainerReact(
         async function fetchData(){
             try{
                 //Request to read todo Item from database
-                let response = await fetch('http://localhost:8090/todos/readAllItemsForUser', {
+                let response = await fetch( APIEndPoints.getAllTodosForUser, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

@@ -29,7 +29,7 @@ export default function ForgotPasswordForm({showLoginFormHandler}) {
                     </div>
                 </div>
                 <div className={Style.buttonContainer}>
-                    <button>Submit</button>
+                    <button onClick={(e) => e.preventDefault()}>Submit</button>
                     <button onClick={showLoginFormHandler}>Back to Login</button>
                 </div>
                 

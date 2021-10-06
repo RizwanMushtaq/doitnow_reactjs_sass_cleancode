@@ -1,18 +1,17 @@
 import React,{useState} from 'react'
 import Style  from './AppPage.module.scss'
+import APIEndPoints from '../config/apiEndPoints'
 
 import Header from './AppPageComponents/Header'
 import Data from './AppPageComponents/Data'
 
-// import CalenderContainer from './AppPageComponents/CalenderContainer'
-// import CalenderContainerNew from './AppPageComponents/CalenderContainerNew'
 import CalenderContainerReact from './AppPageComponents/Calender/CalenderContainerReact'
 import ToDoContainer from './AppPageComponents/ToDoContainer'
 
 import Background from './AppPageComponents/Background'
 import AddToDoItemDialog from './AppPageComponents/AddToDoItemDialog'
 
-import dateForViewer from '../components/GlobalVariable_DateForViewer'
+import dateForViewer from './GlobalVariable_DateForViewer'
 
 export default function AppPage({username, password, handleLogoutButtonClick}) {
 
@@ -116,7 +115,7 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
 
             try{
                 //Request to write todo Item in database
-                let response = await fetch('http://localhost:8090/todos/write', {
+                let response = await fetch( APIEndPoints.writeTodoItem, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -180,7 +179,7 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
 
         try{
             //Request to write todo Item in database
-            let response = await fetch('http://localhost:8090/todos/updateDoneState', {
+            let response = await fetch( APIEndPoints.updateDoneState , {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -231,7 +230,7 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
 
         try{
             //Request to write todo Item in database
-            let response = await fetch('http://localhost:8090/todos/deleteItem', {
+            let response = await fetch( APIEndPoints.deleteTodoItem, {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

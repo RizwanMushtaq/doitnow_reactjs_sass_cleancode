@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Style  from './ToDoContainer.module.scss'
+import APIEndPoints from '../../config/apiEndPoints'
 
 import plusIcon from '../../images/plus-svgrepo-com.svg'
 import deleteIcon from '../../images/Papierkorb.svg'
-// import setDate from 'date-fns/setDate'
 
 export default function ToDoContainer(
     {
@@ -31,8 +31,8 @@ export default function ToDoContainer(
 
         async function fetchData(){
             try{
-                //Request to read todo Item from database
-                let response = await fetch('http://localhost:8090/todos/read', {
+                //Request to read todo Itemsm for specific date and specific user from database
+                let response = await fetch( APIEndPoints.getTodosForDateSelected, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

@@ -4,7 +4,8 @@ import LoginPage from './components/LoginPage'
 import AppPage from './components/AppPage'
 import './scss/App.scss'
 
-import Forms from './functions/checkForms'
+import APIEndPoints from './config/apiEndPoints'
+import Forms from './form_handling_functions/checkForms'
 
 export default function App() {
   
@@ -25,8 +26,8 @@ export default function App() {
   }
   
   //function to call, when user click login button in login form
-  const showAppPage = (e) => {
-    console.log('In showAppPageFunction')
+  const userLoginRequestHandler = (e) => {
+    console.log('In userLoginRequestHandler Function')
     e.preventDefault()
     if(Forms.checkLoginFormInputs()){
       let username = document.querySelector('#LoginFormUserInput').value
@@ -34,13 +35,13 @@ export default function App() {
       setUsername(username)
       setPassword(password)
 
-      const callVerifyUserFunction = async () => {
+      const VerifyUser = async () => {
         try{
           let user = document.querySelector('#LoginFormUserInput').value
           let password = document.querySelector('#LoginFormPasswordInput').value
           
           //Request to authenticate User at Login Request
-          let response = await fetch('http://localhost:8090/users/verify', {
+          let response = await fetch( APIEndPoints.userLogin, {
                           method: 'POST',
                           headers: {
                               'Accept': 'application/json',
@@ -84,7 +85,7 @@ export default function App() {
         }
       }
   
-      callVerifyUserFunction()
+      VerifyUser()
       console.log('waiting')
 
     } else{
@@ -93,37 +94,65 @@ export default function App() {
   }
 
   //function to call, when user click Register button in registration form
-  const registerUser = (e) => {
-    console.log('In Register User Function')
+  const userRegistrationRequestHandler = (e) => {
+    console.log('In userRegistrationRequestHandler Function')
     e.preventDefault()
+    
     if(Forms.checkRegistrationFormInputs()){
-
       console.log('All inputs are entered')
-      const callRegisterUserFunction = async () => {
+      let user = document.querySelector('#RegistrationFormUserInput').value
+      let email = document.querySelector('#RegistrationFormEMailInput').value
+      let password = document.querySelector('#RegistrationFormPasswordInput').value
+
+      const registerUser = async () => {
         try{
-          let registrationResponse =  await Forms.enterUserinDB()
-          console.log(registrationResponse)
-          if(registrationResponse === '01'){
-              alert('User Registration Successful')
-              document.querySelector('#RegistrationFormUserInput').value = ''
-              document.querySelector('#RegistrationFormEMailInput').value = ''
-              document.querySelector('#RegistrationFormPasswordInput').value = ''
-          }else if(registrationResponse === '02'){
-              alert('User Name Not Available')
-          }
+          // let registrationResponse =  await Forms.enterUserinDB()
+          // console.log(registrationResponse)
+          let response = await fetch('http://localhost:8090/users/registerUser', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "username":user,
+                        "email":email,
+                        "password":password
+                    })
+            })
+            console.log("Actual response from backend")
+            console.log(response)
+            if(response.status === 200) {
+              let data = await response.json()
+              console.log("Payload Data is : ")
+              console.log(data)
+
+              if(data.result === 'success'){
+                  alert('User Registration Successful')
+                  document.querySelector('#RegistrationFormUserInput').value = ''
+                  document.querySelector('#RegistrationFormEMailInput').value = ''
+                  document.querySelector('#RegistrationFormPasswordInput').value = ''
+              }else if(data.result === 'duplicate'){
+                  alert('User Name Not Available')
+              }
+
+            } else {
+              console.log(response)
+            }
         } catch(e){
           alert(e)
           console.log(e)
         }
       }
 
-      callRegisterUserFunction()
+      registerUser()
       console.log('waiting')
 
     } else{
       console.log('Please enter values in required field')
     }
   }
+  
   //function to call when user click on logout button in AppPage Viewer
   const handleLogoutButtonClick = () => {
     console.log("In handleLogoutButtonClick function")
@@ -142,7 +171,7 @@ export default function App() {
   }else if(appState === 'LoginPage'){
     return (
       <div className="App">
-        <LoginPage showAppPageHandler={showAppPage} registerUserHandler={registerUser} />
+        <LoginPage userLoginRequestHandler={userLoginRequestHandler} userRegistrationRequestHandler={userRegistrationRequestHandler} />
       </div>
     )
   }else if(appState === 'AppPage'){

@@ -5,7 +5,7 @@ import UserLogo from '../images/Benutzer.svg'
 import PasswordLogo from '../images/Passwortschloss.svg'
 import EmailLogo from '../images/Mail.svg'
 
-export default function RegistrationForm({registerUserHandler}) {
+export default function RegistrationForm({userRegistrationRequestHandler}) {
     return (
         <div className={Style.Container}>
             <form>
@@ -39,7 +39,7 @@ export default function RegistrationForm({registerUserHandler}) {
                     </div>
                 </div>
                 <div className={Style.buttonContainer}>
-                    <button onClick={registerUserHandler}>Register</button>
+                    <button onClick={userRegistrationRequestHandler}>Register</button>
                 </div>
             </form>
         </div>

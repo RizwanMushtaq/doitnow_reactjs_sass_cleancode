@@ -4,7 +4,7 @@ import Style  from './LoginFom.module.scss'
 import UserLogo from '../images/Benutzer.svg'
 import PasswordLogo from '../images/Passwortschloss.svg'
 
-export default function LoginForm({showForgotPasswordFormHandler, showAppPageHandler}) {
+export default function LoginForm({showForgotPasswordFormHandler, userLoginRequestHandler}) {
     return (
         <div className={Style.Container}>
             <form>
@@ -30,7 +30,7 @@ export default function LoginForm({showForgotPasswordFormHandler, showAppPageHan
                     </div>
                 </div>
                 <div className={Style.buttonContainer}>
-                    <button onClick={showAppPageHandler}>Login</button>
+                    <button onClick={userLoginRequestHandler}>Login</button>
                 </div>
             </form>
         </div>
