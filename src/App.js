@@ -108,7 +108,7 @@ export default function App() {
         try{
           // let registrationResponse =  await Forms.enterUserinDB()
           // console.log(registrationResponse)
-          let response = await fetch('http://localhost:8090/users/registerUser', {
+          let response = await fetch(APIEndPoints.userRegistration, {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',

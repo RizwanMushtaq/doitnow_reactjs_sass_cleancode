@@ -1,6 +1,7 @@
 const APIEndPoints = {}
 
 APIEndPoints.userLogin = 'http://localhost:8090/users/verify'
+APIEndPoints.userRegistration = 'http://localhost:8090/users/registerUser'
 
 APIEndPoints.getTodosForDateSelected = 'http://localhost:8090/todos/read'
 APIEndPoints.writeTodoItem = 'http://localhost:8090/todos/write'
