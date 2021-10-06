@@ -5,7 +5,16 @@ import plusIcon from '../../images/plus-svgrepo-com.svg'
 import deleteIcon from '../../images/Papierkorb.svg'
 // import setDate from 'date-fns/setDate'
 
-export default function ToDoContainer({selectedDay, selectedMonth, selectedYear, handleAddTodoIconClick, updateToDoContainer, handleCheckboxClick}) {
+export default function ToDoContainer(
+    {
+    selectedDay, 
+    selectedMonth, 
+    selectedYear, 
+    handleAddTodoIconClick, 
+    updateToDoContainer, 
+    handleCheckboxClick,
+    handleDeleteIconClick
+    }) {
 
     console.log('In ToDoContainer Component')
     let selectedDate = selectedDay + '.' + selectedMonth + '.' + selectedYear
@@ -96,12 +105,20 @@ export default function ToDoContainer({selectedDay, selectedMonth, selectedYear,
                                         <input type="checkbox" className={Style.todoCheckboxInput} id={item.Item_ID} onChange={handleCheckboxClick} />
                                     </div>
                                 }
-                                   
-                                <div className={Style.todo_item}>
-                                    <div>{item.Todo}</div>
-                                </div>
-                                <div className={Style.todo_deleteDiv}>
-                                    <img src={deleteIcon} alt="deleteIcon" />
+
+                                {   item.Done
+                                    ?
+                                    <div className={Style.todo_item}>
+                                        <div className={Style.todo_item_done}>{item.Todo}</div>
+                                    </div>
+                                    :
+                                    <div className={Style.todo_item}>
+                                        <div>{item.Todo}</div>
+                                    </div>
+                                } 
+                                
+                                <div className={Style.todo_deleteDiv} >
+                                    <img src={deleteIcon} alt="deleteIcon" id={item.Item_ID} onClick={handleDeleteIconClick} />
                                 </div>
                             </div>
                             )})

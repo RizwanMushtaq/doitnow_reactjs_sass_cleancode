@@ -28,6 +28,8 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
     let [updateToDoContainer, setUpdateToDoContainer] = useState(false)
 
     let handleDaysDivClickevent = (event) => {
+        console.log('In handleDaysDivClickevent function')
+        
         event.target.classList.forEach(element => {
             if(element === 'otherDays'){
                 console.log(element)
@@ -41,7 +43,7 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                 console.log(event.target.classList)
                 event.target.classList.add('selectedDay')
 
-                let selectedDay = String(event.target.innerHTML)
+                let selectedDay = String(event.target.firstChild.innerHTML)
                 setSelectedDay(selectedDay)
                 
                 console.log(event.target.parentElement.previousSibling.previousSibling.childNodes[1].innerHTML)
@@ -167,9 +169,106 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
         
     }
     //Function to handle when user click on check box to set item to done or undone state in ToDoContainer Component
-    let handleCheckboxClick = (event) => {
+    let handleCheckboxClick = async (event) => {
+        console.log("In handleCheckboxClick function")
         console.log(event.target.id)
         console.log(event.target.checked)
+
+        let bearerToken = localStorage.getItem('BearerToken')
+        let state = event.target.checked
+        let itemId = event.target.id
+
+        try{
+            //Request to write todo Item in database
+            let response = await fetch('http://localhost:8090/todos/updateDoneState', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': bearerToken
+                },
+                body: JSON.stringify({
+                    "state": state,
+                    "itemId": itemId
+                })
+            })
+            console.log("Actual response from backend")
+            console.log(response)
+
+            if(response.status === 200){
+                let data = await response.json()
+                console.log(data)
+                if(data.result === 'success'){
+                    
+                    
+                    console.log('data updated successfully')
+                    //making useState hook to toggel to update viewer each time
+                    if(updateToDoContainer === true){
+                        setUpdateToDoContainer(false)
+                    }else{
+                        setUpdateToDoContainer(true)
+                    }
+                }
+            } else{
+                alert(response)
+                console.log(response)
+            }
+
+        } catch(e) {
+            console.log('In catch error block')
+            alert(e)
+            console.log(e)
+        }
+
+    }
+    //Function to handle when user click on delete icon
+    let handleDeleteIconClick = async (event) => {
+        console.log("In handleDeleteIconClick function")
+        console.log(event.target.id)
+
+        let bearerToken = localStorage.getItem('BearerToken')
+        let itemId = event.target.id
+
+        try{
+            //Request to write todo Item in database
+            let response = await fetch('http://localhost:8090/todos/deleteItem', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': bearerToken
+                },
+                body: JSON.stringify({
+                    "itemId": itemId
+                })
+            })
+            console.log("Actual response from backend")
+            console.log(response)
+
+            if(response.status === 200){
+                let data = await response.json()
+                console.log(data)
+                if(data.result === 'success'){
+                    
+                    
+                    console.log('data updated successfully')
+                    //making useState hook to toggel to update viewer each time
+                    if(updateToDoContainer === true){
+                        setUpdateToDoContainer(false)
+                    }else{
+                        setUpdateToDoContainer(true)
+                    }
+                }
+            } else{
+                alert(response)
+                console.log(response)
+            }
+
+        } catch(e) {
+            console.log('In catch error block')
+            alert(e)
+            console.log(e)
+        }
     }
 
     return (
@@ -181,13 +280,20 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                 </div>
                 <div className={Style.BodyComponentsContainer}>
                     <Data>
-                        <CalenderContainerReact handleDaysDivClickevent = {handleDaysDivClickevent} selectedDay={selectedDay} selectedMonth={selectedMonth} selectedYear={selectedYear} />
+                        <CalenderContainerReact 
+                            handleDaysDivClickevent = {handleDaysDivClickevent} 
+                            selectedDay={selectedDay} 
+                            selectedMonth={selectedMonth} 
+                            selectedYear={selectedYear}
+                            updateToDoContainer = {updateToDoContainer} 
+                        />
                         <ToDoContainer 
                             selectedDay={selectedDay} 
                             selectedMonth={selectedMonth} 
                             selectedYear={selectedYear} 
                             handleAddTodoIconClick={handleAddTodoIconClick}
-                            handleCheckboxClick={handleCheckboxClick} 
+                            handleCheckboxClick={handleCheckboxClick}
+                            handleDeleteIconClick={handleDeleteIconClick} 
                             updateToDoContainer = {updateToDoContainer}
                         />
                     </Data>

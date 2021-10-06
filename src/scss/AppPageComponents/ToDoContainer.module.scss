@@ -82,6 +82,9 @@
     text-align: left;
     word-wrap: break-word;
 }
+.todo_item_done{
+    text-decoration: line-through;
+}
 .todo_deleteDiv{
     margin: 0.5rem;
     width: 1.5rem;
