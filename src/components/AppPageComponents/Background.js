@@ -1,5 +1,5 @@
 import React from 'react'
-import Style  from '../../scss/AppPageComponents/Background.module.scss'
+import Style  from './Background.module.scss'
 
 import BackgroundImage from '../../images/todolist.jpg'
 

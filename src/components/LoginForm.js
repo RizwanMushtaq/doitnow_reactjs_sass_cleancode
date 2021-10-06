@@ -1,5 +1,5 @@
 import React from 'react'
-import Style  from '../scss/LoginFom.module.scss'
+import Style  from './LoginFom.module.scss'
 
 import UserLogo from '../images/Benutzer.svg'
 import PasswordLogo from '../images/Passwortschloss.svg'

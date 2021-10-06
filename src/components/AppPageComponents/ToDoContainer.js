@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Style  from '../../scss/AppPageComponents/ToDoContainer.module.scss'
+import Style  from './ToDoContainer.module.scss'
 
 import plusIcon from '../../images/plus-svgrepo-com.svg'
 import deleteIcon from '../../images/Papierkorb.svg'

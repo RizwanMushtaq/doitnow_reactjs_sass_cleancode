@@ -1,5 +1,5 @@
 import React from 'react'
-import Style  from '../../scss/AppPageComponents/Header.module.scss'
+import Style  from './Header.module.scss'
 
 export default function header({username, handleLogoutButtonClick}) {
 

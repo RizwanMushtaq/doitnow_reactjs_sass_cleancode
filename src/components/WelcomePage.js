@@ -1,5 +1,5 @@
 import React from 'react'
-import Style  from '../scss/WelcomePage.module.scss'
+import Style  from './WelcomePage.module.scss'
 import BackgroundImage from '../images/todolistshort.jpg'
 import CheckedBox from '../images/checked-box.png'
 

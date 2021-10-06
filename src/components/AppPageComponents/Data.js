@@ -1,5 +1,5 @@
 import React from 'react'
-import Style  from '../../scss/AppPageComponents/Data.module.scss'
+import Style  from './Data.module.scss'
 
 export default function Data(props) {
     return (

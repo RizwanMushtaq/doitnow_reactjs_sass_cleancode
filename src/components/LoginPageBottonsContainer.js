@@ -1,5 +1,5 @@
 import React from 'react'
-import Style  from '../scss/LoginPageBottonsContainer.module.scss'
+import Style  from './LoginPageBottonsContainer.module.scss'
 
 export default function LoginPageBottonsContainer({showLoginFormHandler, showRegistrationFormHandler, loginBottonUnderline, registrationBottonUnderline}) {
     

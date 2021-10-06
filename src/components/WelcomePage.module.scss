@@ -1,4 +1,4 @@
-@import './Variables.scss';
+@import '../scss/Variables.scss';
 
 .container{
     background-color: $background;
@@ -66,49 +66,35 @@
     justify-content: center;
     overflow: hidden;
 }
-.lowerContainerInner{
-    width: $widthOfLoginBlock;
-    height: fit-content;
+.lowerContainer div{
+    width: 400px;
     display: flex;
     flex-direction: column;
-    // border: 1px solid black;
 }
-
-// .buttonsContainer{
-//     display: flex;
-// }
-// .loginButtonContainer, .registrationButtonContainer{
-//     flex: 1;
-//     height: 4rem;
-    
-// }
-// .loginButtonContainer button, .registrationButtonContainer button{
-//     width: 9rem;
-//     height: 2rem;
-//     border: none;
-//     outline: none;
-//     background-color: $buttonBackground;
-//     margin: 0.5rem 0;
-//     font-size: $buttonFontSize;
-//     cursor: pointer;
-// }
-// .loginButtonContainerUnderline{
-//     display: block;
-//     height: 0.25px;
-//     width: 9rem;
-//     background-color: $buttonBackground;
-//     border: 1px solid $buttonBackground;
-//     margin: auto;
-// }
-// .registrationButtonContainerUnderline{
-//     display: block;
-//     height: 0.25px;
-//     width: 9rem;
-//     background-color: $buttonBackground;
-//     border: 1px solid $buttonBackground;
-//     margin: auto;
-// }
-
-.formsContainer{
-    flex: 1;
+.appQuote{
+    font-size: 1.5rem;
+    font-weight: normal;
+    text-align: left;
+    padding-bottom: 0.5rem;
+}
+.appIntro{
+    font-size: 1rem;
+    text-align: left;
+    padding-bottom: 2rem;
+}
+.lowerContainer .buttonContainer{
+    margin-bottom: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.buttonContainer button{
+    height: 100%;
+    width: 50%;
+    font-size: $buttonFontSize;
+    border: none;
+    outline: none;
+    background-color: $buttonBackground;
+    cursor: pointer;
 }

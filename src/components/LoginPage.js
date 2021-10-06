@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Style  from '../scss/LoginPage.module.scss'
+import Style  from './LoginPage.module.scss'
 import BackgroundImage from '../images/todolistshort.jpg'
 import CheckedBox from '../images/checked-box.png'
 

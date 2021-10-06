@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import Style  from '../scss/AppPage.module.scss'
+import Style  from './AppPage.module.scss'
 
 import Header from './AppPageComponents/Header'
 import Data from './AppPageComponents/Data'

@@ -1,5 +1,5 @@
 import React from 'react'
-import Style  from '../scss/ForgotPasswordForm.module.scss'
+import Style  from './ForgotPasswordForm.module.scss'
 
 import UserLogo from '../images/Benutzer.svg'
 import PasswordLogo from '../images/Passwortschloss.svg'
