@@ -1,6 +1,4 @@
-const Forms = {}
-
-Forms.checkLoginFormInputs = () => {
+export const isLoginFormEmpty = () => {
     console.log('In checkLoginFormInputs Function')
     if(document.querySelector('#LoginFormUserInput').value === ''){
         document.querySelector('#LoginFormUserInput').parentElement.style.border = '2px solid red'
@@ -15,12 +13,13 @@ Forms.checkLoginFormInputs = () => {
         document.querySelector('#LoginFormPasswordInput').parentElement.style.border = 'none'
     }
     if(document.querySelector('#LoginFormUserInput').value === '' || document.querySelector('#LoginFormPasswordInput').value === ''){
+        return true
+    }else {
         return false
     }
-    return true
 }
 
-Forms.checkRegistrationFormInputs = () => {
+export const isRegistrationFormEmpty = () => {
     console.log('In checkRegistrationFormInputs Function')
     if(document.querySelector('#RegistrationFormUserInput').value === ''){
         document.querySelector('#RegistrationFormUserInput').parentElement.style.border = '2px solid red'
@@ -41,10 +40,8 @@ Forms.checkRegistrationFormInputs = () => {
         document.querySelector('#RegistrationFormPasswordInput').parentElement.style.border = 'none'
     }
     if(document.querySelector('#RegistrationFormUserInput').value === '' || document.querySelector('#RegistrationFormEMailInput').value === '' || document.querySelector('#RegistrationFormPasswordInput').value === ''){
+        return true
+    } else{
         return false
     }
-
-    return true
 }
-
-export default Forms

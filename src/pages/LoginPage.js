@@ -3,10 +3,10 @@ import Style  from './LoginPage.module.scss'
 import BackgroundImage from '../images/todolistshort.jpg'
 import CheckedBox from '../images/checked-box.png'
 
-import LoginPageBottonsContainer from './LoginPageBottonsContainer'
-import LoginForm from './LoginForm'
-import RegistrationForm from './RegistrationForm'
-import ForgotPasswordForm from './ForgotPasswordForm'
+import LoginPageBottonsContainer from './../components/LoginPageBottonsContainer'
+import LoginForm from './../components/LoginForm'
+import RegistrationForm from './../components/RegistrationForm'
+import ForgotPasswordForm from './../components/ForgotPasswordForm'
 
 export default function LoginPage({userLoginRequestHandler, userRegistrationRequestHandler}) {
 

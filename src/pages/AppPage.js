@@ -1,17 +1,14 @@
 import React,{useState} from 'react'
 import Style  from './AppPage.module.scss'
-import APIEndPoints from '../config/apiEndPoints'
 
-import Header from './AppPageComponents/Header'
-import Data from './AppPageComponents/Data'
-
-import CalenderContainerReact from './AppPageComponents/Calender/CalenderContainerReact'
-import ToDoContainer from './AppPageComponents/ToDoContainer'
-
-import Background from './AppPageComponents/Background'
-import AddToDoItemDialog from './AppPageComponents/AddToDoItemDialog'
-
-import dateForViewer from './GlobalVariable_DateForViewer'
+import APIEndPoints from './../config/apiEndPoints'
+import Header from './../components/AppPageComponents/Header'
+import Data from './../components/AppPageComponents/Data'
+import CalenderContainerReact from './../components/AppPageComponents/Calender/CalenderContainerReact'
+import ToDoContainer from './../components/AppPageComponents/ToDoContainer'
+import Background from './../components/AppPageComponents/Background'
+import AddToDoItemDialog from './../components/AppPageComponents/AddToDoItemDialog'
+import dateForViewer from './../components/GlobalVariable_DateForViewer'
 
 export default function AppPage({username, password, handleLogoutButtonClick}) {
 
