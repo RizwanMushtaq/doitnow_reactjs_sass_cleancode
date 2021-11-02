@@ -193,7 +193,7 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
     
     let handleDeleteIconClick = async (event) => {
         logWithDebug("In handleDeleteIconClick function")
-        
+
         try{
             const response = await deleteTodoItem(event)
             const result = await isTodoItemDeleted(response)
