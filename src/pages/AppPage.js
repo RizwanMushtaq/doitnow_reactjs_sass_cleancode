@@ -1,18 +1,22 @@
 import React,{useState} from 'react'
 import Style  from './AppPage.module.scss'
 
-import APIEndPoints from './../config/apiEndPoints'
-import Header from './../components/AppPageComponents/Header'
-import Data from './../components/AppPageComponents/Data'
-import CalenderContainerReact from './../components/AppPageComponents/Calender/CalenderContainerReact'
-import ToDoContainer from './../components/AppPageComponents/ToDoContainer'
-import Background from './../components/AppPageComponents/Background'
-import AddToDoItemDialog from './../components/AppPageComponents/AddToDoItemDialog'
-import dateForViewer from './../components/GlobalVariable_DateForViewer'
+import APIEndPoints from '../config/apiEndPoints'
+import { logWithDebug } from './../utils/logHandling'
+import { logError } from '../utils/errorHandling'
+import {deleteTodoItem, isTodoItemDeleted, toggleDoneState, isDoneStateUpdated} from './../helpers/appPageLogic'
+
+import Header from '../components/AppPageComponents/Header'
+import Data from '../components/AppPageComponents/Data'
+import CalenderContainerReact from '../components/AppPageComponents/Calender/CalenderContainerReact'
+import ToDoContainer from '../components/AppPageComponents/ToDoContainer'
+import Background from '../components/AppPageComponents/Background'
+import AddToDoItemDialog from '../components/AppPageComponents/AddToDoItemDialog'
+import dateForViewer from '../components/GlobalVariable_DateForViewer'
 
 export default function AppPage({username, password, handleLogoutButtonClick}) {
 
-    console.log('In AppPage Component   ' + username)
+    logWithDebug('In AppPage Component   ' + username)
     
     let todayDate = String(dateForViewer.getDate()).padStart(2,'0')
     let thismonth = String(dateForViewer.getMonth()+1).padStart(2,'0')
@@ -24,11 +28,11 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
     let [updateToDoContainer, setUpdateToDoContainer] = useState(false)
 
     let handleDaysDivClickevent = (event) => {
-        console.log('In handleDaysDivClickevent function')
+        logWithDebug('In handleDaysDivClickevent function')
         
         event.target.classList.forEach(element => {
             if(element === 'otherDays'){
-                console.log(element)
+                logWithDebug(element)
                 return
             } else {
                 let monthDays = document.querySelector('#daysDiv')
@@ -36,17 +40,17 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                     element.classList.remove('selectedDay')
                 })
 
-                console.log(event.target.classList)
+                logWithDebug(event.target.classList)
                 event.target.classList.add('selectedDay')
 
                 let selectedDay = String(event.target.firstChild.innerHTML)
                 setSelectedDay(selectedDay)
                 
-                console.log(event.target.parentElement.previousSibling.previousSibling.childNodes[1].innerHTML)
+                logWithDebug(event.target.parentElement.previousSibling.previousSibling.childNodes[1].innerHTML)
                 
                 let selectedDateString = event.target.parentElement.previousSibling.previousSibling.childNodes[1].innerHTML
                 let selectedDateArray = selectedDateString.split(' ')
-                console.log(selectedDateArray)
+                logWithDebug(selectedDateArray)
 
                 if(selectedDateArray[0] === 'January'){
                     setSelectedMonth('01')
@@ -76,39 +80,39 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
 
                 setSelectedYear(selectedDateArray[1])
 
-                console.log(selectedDay)
-                console.log(selectedMonth)
-                console.log(selectedYear)
+                logWithDebug(selectedDay)
+                logWithDebug(selectedMonth)
+                logWithDebug(selectedYear)
             }
         })
     }
 
     let [showAddToDoItemDialog, setShowAddToDoItemDialog] = useState(false)
     let handleAddTodoIconClick = () => {
-        console.log("In handleAddTodoIconClick function")
+        logWithDebug("In handleAddTodoIconClick function")
         setShowAddToDoItemDialog(true)
     }
 
     //Function to handle cancel button click in AddToDoItem Dialog
     let handleCancelButtonClick = () => {
-        console.log("In handleCancelButtonClick function")
+        logWithDebug("In handleCancelButtonClick function")
         setShowAddToDoItemDialog(false)
     }
     //Function to handle save button click in AddToDoItem Dialog
     let handleSaveButtonClick = async () => {
-        console.log("In handleSaveButtonClick function")
-        console.log(document.querySelector('#toDoTextArea').value.trim().length)
+        logWithDebug("In handleSaveButtonClick function")
+        logWithDebug(document.querySelector('#toDoTextArea').value.trim().length)
         if(document.querySelector('#toDoTextArea').value.trim().length){
-            console.log('input field is OK')
+            logWithDebug('input field is OK')
 
             let bearerToken = localStorage.getItem('BearerToken')
             let userID = localStorage.getItem('userID')
             let toDoItem = document.querySelector('#toDoTextArea').value
             let selectedDate = selectedDay + '.' + selectedMonth + '.' + selectedYear
             let done = false
-            console.log(toDoItem)
-            console.log(userID)
-            console.log(selectedDate)
+            logWithDebug(toDoItem)
+            logWithDebug(userID)
+            logWithDebug(selectedDate)
 
             try{
                 //Request to write todo Item in database
@@ -127,16 +131,16 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                         
                     })
                 })
-                console.log("Actual response from backend")
-                console.log(response)
+                logWithDebug("Actual response from backend")
+                logWithDebug(response)
 
                 if(response.status === 200){
                     let data = await response.json()
-                    console.log(data)
+                    logWithDebug(data)
                     if(data.result === 'success'){
                         
                         setShowAddToDoItemDialog(false)
-                        console.log('data inserted successfully')
+                        logWithDebug('data inserted successfully')
                         //making useState hook to toggel to update viewer each time
                         if(updateToDoContainer === true){
                             setUpdateToDoContainer(false)
@@ -146,124 +150,62 @@ export default function AppPage({username, password, handleLogoutButtonClick}) {
                     }
                 } else{
                     alert(response)
-                    console.log(response)
+                    logWithDebug(response)
                 }
 
             } catch(e) {
-                console.log('In catch error block')
+                logWithDebug('In catch error block')
                 alert(e)
-                console.log(e)
+                logWithDebug(e)
             }
             
 
-            console.log("waiting ....")
+            logWithDebug("waiting ....")
             
         } else {
-            console.log('input field empty')
+            logWithDebug('input field empty')
             alert('input field is empty')
         }
         
     }
-    //Function to handle when user click on check box to set item to done or undone state in ToDoContainer Component
+   
     let handleCheckboxClick = async (event) => {
-        console.log("In handleCheckboxClick function")
-        console.log(event.target.id)
-        console.log(event.target.checked)
-
-        let bearerToken = localStorage.getItem('BearerToken')
-        let state = event.target.checked
-        let itemId = event.target.id
+        logWithDebug("In handleCheckboxClick function")
 
         try{
-            //Request to write todo Item in database
-            let response = await fetch( APIEndPoints.updateDoneState , {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': bearerToken
-                },
-                body: JSON.stringify({
-                    "state": state,
-                    "itemId": itemId
-                })
-            })
-            console.log("Actual response from backend")
-            console.log(response)
+            const response = await toggleDoneState(event) 
+            logWithDebug(response)
+            const result = await isDoneStateUpdated(response)
 
-            if(response.status === 200){
-                let data = await response.json()
-                console.log(data)
-                if(data.result === 'success'){
-                    
-                    
-                    console.log('data updated successfully')
-                    //making useState hook to toggel to update viewer each time
-                    if(updateToDoContainer === true){
-                        setUpdateToDoContainer(false)
-                    }else{
-                        setUpdateToDoContainer(true)
-                    }
+            if(result === true){
+                if(updateToDoContainer === true){
+                    setUpdateToDoContainer(false)
+                }else{
+                    setUpdateToDoContainer(true)
                 }
             } else{
-                alert(response)
-                console.log(response)
+                logWithDebug(result)
             }
-
         } catch(e) {
-            console.log('In catch error block')
-            alert(e)
-            console.log(e)
+            logError(e)
         }
-
     }
-    //Function to handle when user click on delete icon
+    
     let handleDeleteIconClick = async (event) => {
-        console.log("In handleDeleteIconClick function")
-        console.log(event.target.id)
-
-        let bearerToken = localStorage.getItem('BearerToken')
-        let itemId = event.target.id
-
+        logWithDebug("In handleDeleteIconClick function")
+        
         try{
-            //Request to write todo Item in database
-            let response = await fetch( APIEndPoints.deleteTodoItem, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': bearerToken
-                },
-                body: JSON.stringify({
-                    "itemId": itemId
-                })
-            })
-            console.log("Actual response from backend")
-            console.log(response)
-
-            if(response.status === 200){
-                let data = await response.json()
-                console.log(data)
-                if(data.result === 'success'){
-                    
-                    
-                    console.log('data updated successfully')
-                    //making useState hook to toggel to update viewer each time
-                    if(updateToDoContainer === true){
-                        setUpdateToDoContainer(false)
-                    }else{
-                        setUpdateToDoContainer(true)
-                    }
+            const response = await deleteTodoItem(event)
+            const result = await isTodoItemDeleted(response)
+            if(result === true){
+                if(updateToDoContainer === true){
+                    setUpdateToDoContainer(false)
+                }else{
+                    setUpdateToDoContainer(true)
                 }
-            } else{
-                alert(response)
-                console.log(response)
             }
-
         } catch(e) {
-            console.log('In catch error block')
-            alert(e)
-            console.log(e)
+            logError(e)
         }
     }
 
