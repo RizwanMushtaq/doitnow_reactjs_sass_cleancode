@@ -56,7 +56,6 @@ export default function App() {
   
   }
   
-  //function to call when user click on logout button in AppPage Viewer
   const handleLogoutButtonClick = () => {
     logWithDebug("In handleLogoutButtonClick function")
     logWithDebug(appState)
